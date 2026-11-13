@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Night Tram speed check</title>
+<link rel="icon" href="data:,">  <!-- (no favicon request: a 404 would be a console error) -->
+<style>:root{--lightningcss-light: ;--lightningcss-dark:initial;color-scheme:dark}html,body{color:#efe6d4;background:#1d1b2a;height:100%;margin:0;font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;overflow:hidden}[hidden]{display:none!important}#screen{height:168px;position:fixed;top:0;left:0;right:0}#stage{position:absolute;inset:0}#stage canvas{width:100%;height:100%;display:block;position:absolute;inset:0}#err{color:#efe6d4;text-align:center;background:#1c1a27d9;place-items:center;padding:12px;font:13px ui-monospace,monospace;display:grid;position:absolute;inset:0}#panel{border-top:1px solid #3a3550;position:fixed;inset:168px 0 0;overflow-y:auto}#panel>div{max-width:44rem;margin:0 auto;padding:1.25rem 1rem 2rem}h1{margin:0 0 .5rem;font-size:1.4rem}h2{margin:1.5rem 0 .25rem;font-size:1.15rem}ol{margin:.5rem 0;padding-left:1.4rem}button{font:inherit;color:#1d1b2a;cursor:pointer;background:#c9a75a;border:1px solid #c9a75a;border-radius:6px;padding:.5rem 1.25rem}button:disabled{opacity:.5;cursor:default}button.quiet{color:#efe6d4;background:0 0;border-color:#6b6488}#progress{color:#d8cdb6;min-height:1.5em}.note{color:#a59cba;font-size:.92rem}.warn{color:#e8c07a}table{border-collapse:collapse;width:100%;margin:.5rem 0}th,td{text-align:left;vertical-align:top;border-bottom:1px solid #2f2b42;padding:.3rem .75rem .3rem 0}th{color:#b9b0c9;font-weight:500}td{font-variant-numeric:tabular-nums;word-break:break-word}textarea{box-sizing:border-box;color:#efe6d4;background:#15131f;border:1px solid #3a3550;border-radius:6px;width:100%;padding:.5rem;font:13px/1.4 ui-monospace,monospace}</style>
+  <script type="module" crossorigin src="../assets/speed-Bxu3i6hA.js"></script>
+  <link rel="modulepreload" crossorigin href="../assets/modulepreload-polyfill-P2Xu9kJm.js">
+  <link rel="modulepreload" crossorigin href="../assets/rolldown-runtime-4tVxZq34.js">
+  <link rel="modulepreload" crossorigin href="../assets/three.module-DLVS3ftY.js">
+  <link rel="modulepreload" crossorigin href="../assets/p-D0tU-xvH.js">
+</head>
+<body>
+<!-- The speed check (Task 1.5): the Paris strip at its real size across the top; the steps, progress and results below. -->
+<div id="screen"><div id="stage" role="img" aria-label="The tram strip"><div id="err" hidden></div></div></div>
+<div hidden>   <!-- (the ride harness expects these controls; this page does not show them) -->
+  <div id="tabs"></div><p id="lookBlurb"></p><span id="status"></span>
+  <div id="lightGroup"><button type="button" data-light="golden"></button><button type="button" data-light="morning"></button><button type="button" data-light="night"></button></div>
+  <button id="sizeReal" type="button"></button><button id="sizeBig" type="button"></button><button id="sizeMini" type="button"></button>
+</div>
+<main id="panel"><div>
+  <h1>Night Tram speed check</h1>
+  <p>This checks how smoothly the tram strip above runs on this computer. It takes about 2 minutes.</p>
+  <ol>
+    <li>If you can, plug in the charger and close other apps.</li>
+    <li>Press Start, then leave the computer alone until the results show. Keep this window in front: don't switch tabs, cover it or resize it.</li>
+    <li>Press Copy results and paste them in a message to Hung.</li>
+  </ol>
+  <p class="note">Nothing is sent anywhere: the results stay on this page until you copy them.</p>
+  <p><button id="start" type="button" disabled>Start</button></p>
+  <p id="progress" aria-live="polite"></p>
+
+  <section id="results" hidden aria-labelledby="results-title">
+    <h2 id="results-title">Results</h2>
+    <p id="slow-note" class="warn" hidden></p>
+    <p class="note">These numbers are for Hung: you don't need to read them.</p>
+    <table>
+      <tr><th scope="row">Browser</th><td data-result="browser"></td></tr>
+      <tr><th scope="row">System</th><td data-result="system"></td></tr>
+      <tr><th scope="row">Graphics</th><td data-result="graphics"></td></tr>
+      <tr><th scope="row">Pixel ratio</th><td data-result="pixel-ratio"></td></tr>
+      <tr><th scope="row">Strip</th><td data-result="strip"></td></tr>
+      <tr><th scope="row">Display</th><td data-result="display"></td></tr>
+      <tr><th scope="row">Power</th><td data-result="power"></td></tr>
+    </table>
+    <table>
+      <tr><td></td><th scope="col">60 frames a second</th><th scope="col">30 frames a second</th></tr>
+      <tr><th scope="row">Frames on time</th><td data-result="on-time-60"></td><td data-result="on-time-30"></td></tr>
+      <tr><th scope="row">Frames a second</th><td data-result="frames-per-s-60"></td><td data-result="frames-per-s-30"></td></tr>
+      <tr><th scope="row">Work per frame, average</th><td data-result="cpu-avg-60"></td><td data-result="cpu-avg-30"></td></tr>
+      <tr><th scope="row">Work per frame, slowest 5%</th><td data-result="cpu-p95-60"></td><td data-result="cpu-p95-30"></td></tr>
+      <tr><th scope="row">Graphics card, average</th><td data-result="gpu-avg-60"></td><td data-result="gpu-avg-30"></td></tr>
+      <tr><th scope="row">Graphics card, slowest 5%</th><td data-result="gpu-p95-60"></td><td data-result="gpu-p95-30"></td></tr>
+      <tr><th scope="row">Longest pause</th><td data-result="longest-task-60"></td><td data-result="longest-task-30"></td></tr>
+    </table>
+    <p><button id="copy" type="button" class="quiet">Copy results</button> <span id="copied" aria-live="polite"></span></p>
+    <p><label for="results-text" class="note">The same results as text:</label></p>
+    <textarea id="results-text" rows="9" readonly></textarea>
+  </section>
+</div></main>
+</body>
+</html>
